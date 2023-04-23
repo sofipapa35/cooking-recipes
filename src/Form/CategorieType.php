@@ -15,10 +15,9 @@ class CategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre', TextType::class, ['label'=> "Titre"])
+            ->add('titre', TextType::class, ['label'=> "Titre*"])
             ->add('description', CKEditorType::class, ['label'=> "Description", 'required' => false])
             ->add('imageFile', FileType::class, ['label'=>'Image', 'required' => false])
-            // ->add('recettes')
         ;
     }
 

@@ -86,9 +86,10 @@
 
 
 		{# ------------ Liste----------------- #}
-		<div class="d-md-flex">
-			{% set foo = rec_detail[0].etapes|split('\r\n\r\n') %}
-			{% set l = rec_detail[0].liste|split('\r\n\r\n') %}
+		<div class="d-md-flex w-100">
+
+				{% set foo = rec_detail[0].etapes|split('\r\n\r\n') %}
+				{% set l = rec_detail[0].liste|split('\r\n\r\n') %}
 
 			<div class="col-md-3 me-md-2">
 				<h4>Vous allez besoin...</h4>

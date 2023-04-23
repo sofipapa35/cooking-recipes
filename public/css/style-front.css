@@ -203,9 +203,9 @@ h4{
     font-size: 18px;
   }
   /* When clicked on, add a background color and strike out text */
-.checked2{
+/* .checked2{
   text-decoration: line-through;
-}
+} */
 #myUL {
   padding: 0;
 }
@@ -213,7 +213,7 @@ h4{
   background-color: #E8E8E8;
   border: 2px solid #E0E0E0;
 }
-#myUL li.checked{
+#myUL li.checked2{
   background-color: #B0B0B0;
   border: 2px solid #888888;
 }
@@ -221,7 +221,7 @@ h4{
   margin: 0;
 }
 /* Add a "checked" mark when clicked on */
-#myUL li.checked::before {
+#myUL li.checked2::before {
   content: '';
   position: absolute;
   border-color: #E0E0E0;
@@ -273,5 +273,3 @@ h4{
   text-decoration: none;
   cursor: pointer;
 }
-
-/* ---------- Rating stars ---------------- */

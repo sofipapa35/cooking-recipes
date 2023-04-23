@@ -15,8 +15,8 @@ class IngredientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre', TextType::class, ['label'=> "Titre"])
-            ->add('description', CKEditorType::class, ['label'=> "Liste d'ingredients", 'required' => false])
+            ->add('titre', TextType::class, ['label'=> "Titre*"])
+            ->add('description', CKEditorType::class, ['label'=> "Description", 'required' => false])
             ->add('imageFile', FileType::class, ['label'=>'Image', 'required' => false])
             // ->add('recettes')
         ;

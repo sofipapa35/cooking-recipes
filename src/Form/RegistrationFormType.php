@@ -51,11 +51,11 @@ class RegistrationFormType extends AbstractType
             'required' => true,
             'first_options' => ['label'=>'Mot de passe *', 
             "attr"=> [
-                'placeholder' => 'Merci de saisir un mot de passe'
+                'placeholder' => 'Merci de saisir un mot de passe*'
             ]],
             'second_options' => ['label'=>'Confirmation de mot de passe *',
             "attr"=> [
-                'placeholder' => 'Merci de saisir un mot de passe'
+                'placeholder' => 'Merci de saisir un mot de passe*'
             ]],
             'attr' => ['autocomplete' => 'new-password'],
             'constraints' => [
