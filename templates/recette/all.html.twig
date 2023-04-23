@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recettes
+{% endblock %}
+
+{% block body %}
+	{# <form method="post" class="d-flex mb-3"> #}
+	<input
+	type="text" name="search" placeholder="Rechercher une recette " class="form-control my-3" id="live_search" autocomplete="off">
+	{# </form> #}
+	<div class="d-flex flex-wrap w-100" id="allrec"></div>
+	<div id="all">
+		<div class="d-flex flex-wrap w-100">
+			{% for r in rec %}
+				<div class="col-md-2 position-relative">
+					<a href="{{path("recette_detail", {id: r.id})}}">
+						<div class="card m-1 h-100">
+							<div class="slide-note">
+								<img src="{{asset('img/recettes/' ~ r.imageName)}}" class="card-img-top" alt="{{r.titre}}">
+								<div class="card-body">
+									<h5 class="card-text text-center">{{r.titre|capitalize}}</h5>
+								</div>
+							</div>
+						</div>
+					</a>
+					{% if is_granted('ROLE_USER') %}
+						{% if r not in app.user.recettes %}
+							<span class="position-absolute top-50 end-0 translate-middle badge rounded-pill bg-danger heart-front">
+								<i class="fas fa-heart bt-list" title="Ajouter à ma liste" data-rid="{{ r.id }}"></i>
+							</span>
+						{% endif %}
+					{% endif %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+		$(document).ready(function () {
+
+$("#live_search").keyup(function () {
+var input = $(this).val();
+if (input != "") {
+$.ajax({
+url: '/getRecette',
+type: 'post',
+data: 'letter=' + input
+}).done(function (response) { // console.log(response);
+$("#allrec").html(response);
+$("#all").addClass("all3");
+});
+} else {
+$("#allrec").html("");
+$("#all").removeClass("all3");
+}
+});
+});
+
+// Avec le sélecteur universel de jQuery $() on récupère tous les objets ayant la classe bt-list afin de leur ajouter
+// un écouteur d'evt click
+$('.bt-list').on("click", function () { // On récupère la valeur de l'attribut data-bookid de l'objet cliqué
+var rid = $(this).attr('data-rid');
+var currentBt = $(this);
+// On met en place une requête asynchrone avec ajax
+$.ajax({
+url: '/user/addrecette',
+type: 'POST',
+data: "id=" + rid
+}).done(function (response) {
+$(currentBt).css("display", "none");
+});
+});
+	</script>
+{% endblock %}

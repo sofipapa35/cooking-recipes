@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categoties |
+	{{cat[0].titre|capitalize}}
+{% endblock %}
+
+{% block body %}
+	{% if cat is not null and cat|length > 0 %}
+		<div>
+			<h4>{{cat[0].titre|capitalize }}</h4>
+			{% if cat[0].imageName %}
+				<div class="d-flex justify-content-center">
+					<div class="col-md-2"><img src="{{asset('img/categories/' ~ cat[0].imageName)}}" alt="{{cat[0].imageName}}"></div>
+				</div>
+			{% endif %}
+
+			{% if cat[0].description %}
+				<div>{{cat[0].description|capitalize|raw}}</div>
+			{% endif %}
+		</div>
+
+		{% if cat[0].recettes is not null and cat[0].recettes|length > 0 %}
+			<div class="d-flex w-100">
+				{% for rec in cat[0].recettes %}
+					<div class="col-md-2">
+						<a href="{{path("recette_detail", {id: rec.id})}}">
+							<div class="card m-1 h-100">
+								<div class="slide-note">
+									<img src="{{asset('img/recettes/' ~ rec.imageName)}}" class="card-img-top" alt="{{rec.titre}}">
+									<div class="card-body">
+										<h5 class="card-text text-center">{{rec.titre|capitalize}}</h5>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		{% endif %}
+	{% endif %}
+
+{% endblock %}

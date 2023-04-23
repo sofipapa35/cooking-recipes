@@ -1,0 +1,287 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recette |
+	{{rec_detail[0].titre}}
+{% endblock %}
+
+{% block body %}
+
+	<!-- The Modal -->
+	<div
+		id="myModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<div>
+				<h4 class="text-center">Ma liste de courses</h4>
+			</div>
+			<div class="modal-liste text-center"></div>
+
+			<button class="btn btn-dark my-3" onclick="window.print()">Print</button>
+		</div>
+	</div>
+
+	{# ----------- Infos---------------- #}
+	<div class="d-flex flex-column justify-content-center align-items-center">
+		<div class="col-md-5"><img src="{{asset('img/recettes/' ~ rec_detail[0].imageName)}}" alt="{{rec_detail[0].titre}}" class="img-det"></div>
+		<h3 class="my-3">{{rec_detail[0].titre|capitalize}}</h3>
+
+
+		<div>
+			{% if rec_detail[0].notation is not null or rec_detail[0].noteNumber != 0 and rec_detail[0].noteNumber is not null or rec_detail[0].noteNumber != 0 %}
+				{% set note =  rec_detail[0].notation / rec_detail[0].noteNumber %}
+				{% set note_round = (rec_detail[0].notation/ rec_detail[0].noteNumber)|round %}
+				{% for i in 1.. note_round %}
+					<i class="fa fa-star" aria-hidden="true" id="st1" name="{{rec_detail[0].id}}" style="color: gold;"></i>
+				{% endfor %}
+				{% set note_different = 5 - note_round %}
+				{% if note_different > 0 %}
+
+					{% for i in 1.. note_different %}
+						<i class="fa fa-star" aria-hidden="true" id="st1" name="{{rec_detail[0].id}}"></i>
+					{% endfor %}
+				{% endif %}
+				<div class="text-center">
+					<h5 class="w'100">{{(rec_detail[0].notation/ rec_detail[0].noteNumber)|round(1, 'floor')}}
+						/ 5</h5>
+				</div>
+			{% endif %}
+		</div>
+
+		<div class="infos d-flex justify-content-center my-3">
+			{% if rec_detail[0].heure %}
+				<div class="d-flex flex-column justify-content-center mx-1">
+
+					<span>
+						<i class="fa-regular fa-clock"></i>
+					</span>
+					<span>Temp de<br>preparation</span>
+					<span>{{rec_detail[0].heure}}
+						min</span>
+				</div>
+			{% endif %}
+			{% if rec_detail[0].qnt %}
+
+				<div class="d-flex flex-column justify-content-center mx-1">
+					<span>
+						<i class="fa-solid fa-people-group"></i>
+					</span>
+					<span>Portion</span>
+					<span>{{rec_detail[0].qnt}}</span>
+				</div>
+			{% endif %}
+			{% if rec_detail[0].cal %}
+
+				<div class="d-flex flex-column justify-content-center mx-1">
+					<span>
+						<i class="fa-solid fa-fire"></i>
+					</span>
+					<span>Calories</span>
+					<span>{{rec_detail[0].cal}}
+						cal</span>
+				</div>
+			{% endif %}
+		</div>
+
+
+		{# ------------ Liste----------------- #}
+		<div class="d-md-flex">
+			{% set foo = rec_detail[0].etapes|split('\r\n\r\n') %}
+			{% set l = rec_detail[0].liste|split('\r\n\r\n') %}
+
+			<div class="col-md-3 me-md-2">
+				<h4>Vous allez besoin...</h4>
+				<div id="liste-courses" class="border border-3">
+					{% for key,value in l %}
+						<div class="ps-2 d-flex border border">
+							<input type="checkbox" id="ing{{key}}" name="ing{{key}}" value="{{ value }}" class="check-liste">
+							<div class="pt-3 ps-3">{{ value|capitalize|raw }}</div>
+						</div>
+					{% endfor %}
+					<div class="p-2">
+						<button class="btn btn-dark w-100" id="myBtn">Imprimez la liste de courses</button>
+					</div>
+				</div>
+			</div>
+
+			{# ------------ Etapes----------------- #}
+			<div class="col-md-9">
+				<h4>Les etapes</h4>
+				<ul id="myUL">
+					{% for key,value in foo %}
+						<div>
+							<li class="my-2">{{ value|capitalize|raw }}</li>
+						</div>
+					{% endfor %}
+				</u>
+			</div>
+		</div>
+
+		<button class="btn btn-dark my-3" onclick="window.print()">Imprimez la recette</button>
+
+
+		{# ------------ Ingredients----------------- #}
+		<div>
+			{% if rec_detail[0].ingredients is not null and rec_detail[0].ingredients|length > 0 %}
+				<h5 class="text-center">Les ingredients</h5>
+				{% for i in rec_detail[0].ingredients %}
+					<a href="{{path('ingredient', {id: i.id})}}">
+						<div class="chip">
+							<img src="{{asset('img/ingredients/' ~ i.imageName)}}" alt="{{i.titre}}" width="96" height="96">
+							{{i.titre|capitalize}}
+						</div>
+					</a>
+				{% endfor %}
+			{% endif %}
+		</div>
+		{# ---------- Rating Star --------------- #}
+		<div class="con text-center my-3">
+			{% if is_granted('ROLE_USER') %}
+				{% set continue = true %}
+				{% for u in rec_detail[0].userNote %}
+					{% if u.id == app.user.id %}
+						<h5>Vous avez deja noté cette recette</h5>
+						{% set continue = false %}
+					{% endif %}
+				{% endfor %}
+				{% if continue %}
+					<div class="starDiv">
+						<h5>Noter la recette</h5>
+						<i class="fa fa-star" aria-hidden="true" id="st1" name="{{rec_detail[0].id}}" num="1"></i>
+						<i class="fa fa-star" aria-hidden="true" id="st2" name="{{rec_detail[0].id}}" num="2"></i>
+						<i class="fa fa-star" aria-hidden="true" id="st3" name="{{rec_detail[0].id}}" num="3"></i>
+						<i class="fa fa-star" aria-hidden="true" id="st4" name="{{rec_detail[0].id}}" num="4"></i>
+						<i class="fa fa-star" aria-hidden="true" id="st5" name="{{rec_detail[0].id}}" num="5"></i>
+					</div>
+					<div class="mess"></div>
+				{% endif %}
+
+			{% else %}
+				<h5>Connectez-vous pour noter cette recette</h5>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+		$(document).ready(function () {
+
+$("#myModal").hide();
+$("li").on("click", function () {
+$(this).toggleClass("checked2");
+});
+
+function foo() {
+$.get('your_server_pdf_generator.php', {
+anyvariable: "value"
+}, function (returnedHtml) {
+var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+mywindow.document.write(returnedHtml);
+mywindow.document.close(); // necessary for IE >= 10
+mywindow.focus(); // necessary for IE >= 10*/
+mywindow.print();
+mywindow.close();
+return true;
+});
+}
+
+
+// Modal
+$("#myBtn").on("click", function () {
+$("#myModal").show();
+$(function () {
+var l = "";
+$("input:checkbox:not(:checked)").each(function () {
+l = l + $(this).val();
+console.log(l);
+
+$(".modal-liste").html(l);
+});
+});
+});
+
+$(".close").on("click", function () {
+$("#myModal").hide();
+});
+
+// ------------- Rating Star--------
+$("#st1").click(function () {
+$(".fa-star").css("color", "black");
+$("#st1").css("color", "gold");
+var n = $(this).attr("num");
+var rId = $(this).attr("name");
+$.ajax({
+url: '/rate-star',
+type: 'POST',
+data: "note=" + n + '&rec=' + rId
+}).done(function (response) {
+$('.mess').html(response);
+$('.starDiv').hide();
+});
+
+});
+$("#st2").click(function () {
+$(".fa-star").css("color", "black");
+$("#st1, #st2").css("color", "gold");
+var n = $(this).attr("num");
+var rId = $(this).attr("name");
+$.ajax({
+url: '/rate-star',
+type: 'POST',
+data: "note=" + n + '&rec=' + rId
+}).done(function (response) {
+$('.mess').html(response);
+$('.starDiv').hide();
+});
+
+});
+$("#st3").click(function () {
+$(".fa-star").css("color", "black")
+$("#st1, #st2, #st3").css("color", "gold");
+var n = $(this).attr("num");
+var rId = $(this).attr("name");
+$.ajax({
+url: '/rate-star',
+type: 'POST',
+data: "note=" + n + '&rec=' + rId
+}).done(function (response) {
+$('.mess').html(response);
+$('.starDiv').hide();
+});
+
+});
+$("#st4").click(function () {
+$(".fa-star").css("color", "black");
+$("#st1, #st2, #st3, #st4").css("color", "gold");
+var n = $(this).attr("num");
+var rId = $(this).attr("name");
+$.ajax({
+url: '/rate-star',
+type: 'POST',
+data: "note=" + n + '&rec=' + rId
+}).done(function (response) {
+$('.mess').html(response);
+$('.starDiv').hide();
+});
+
+});
+$("#st5").click(function () {
+$(".fa-star").css("color", "black");
+$("#st1, #st2, #st3, #st4, #st5").css("color", "gold");
+var n = $(this).attr("num");
+var rId = $(this).attr("name");
+$.ajax({
+url: '/rate-star',
+type: 'POST',
+data: "note=" + n + '&rec=' + rId
+}).done(function (response) {
+$('.mess').html(response);
+$('.starDiv').hide();
+});
+
+});
+
+});
+	</script>
+{% endblock %}

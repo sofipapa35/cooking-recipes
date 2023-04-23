@@ -1,19 +1,72 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link
+		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html>
+		<link
+		rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+		<!-- CSS -->
+		<link
+		rel="stylesheet" href="{{asset('css/style-front.css')}}">
+
+		<!-- CSS only -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{path('home')}}">Recettes</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="{{path('home')}}">
+								<i class="fa-solid fa-house"></i>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('recette')}}">Recettes</a>
+						</li>
+					</ul>
+					{% if is_granted('ROLE_USER') %}
+						<li class="nav-item menulink d-flex align-items-center px-2 {{ app.request.get('_route') == 'profile' ? 'active' }}">
+							<a href="{{ path('profil') }}" class="tray text-light nav-link menulinka" title="Profil">
+								<span class="m-2">{{app.user.prenom}}
+									{{app.user.nom}}</span>
+								<i class="fa-solid fa-user"></i>
+							</a>
+						</li>
+						<li class="nav-item menulink d-flex align-items-center px-2 {{ app.request.get('_route') == 'app_logout' ? 'active' }}">
+							<a href="{{ path('app_logout') }}" class="text-light tray nav-link menulinka" title="Se deconnecter">
+								<i class="fas fa-sign-out-alt ms-2"></i>
+							</a>
+						</li>
+					{% else %}
+						<li class="nav-item menulink d-flex align-items-center px-2 {{ app.request.get('_route') == 'app_login' ? 'active' }}">
+							<a href="{{ path('app_login') }}" class="text-light tray nav-link menulinka" title="Se connecter">
+								<i class="fas fa-sign-in-alt"></i>
+							</a>
+						</li>
+					{% endif %}
+				</div>
+			</div>
+		</nav>
+		<div class="container my-4"> {% block body %}{% endblock %}
+			</div>
+		</body>
+	</html>
+
+	<script src="{{ asset('js/jquery-3.6.js')}}"></script>
+	{% block javascripts %}{% endblock %}

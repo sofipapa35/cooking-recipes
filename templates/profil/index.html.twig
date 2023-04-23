@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil
+{% endblock %}
+
+{% block body %}
+	<div class="border border p-3">
+		<h4>Favoris</h4>
+		{% if user.recettes|length > 0 %}
+			<div class="d-flex flex-wrap my-2">
+				{% for rec in user.recettes %}
+					<div class="card col-md-2">
+					<a href="{{path('recette_detail', {id: rec.id})}}">
+						<img src="{{ asset('img/recettes/' ~ rec.imageName)}}" class="card-img-top" alt="{{ rec.titre }}">
+					</a>
+						<div class="card-body d-flex flex-column justify-content-between">
+							<h5 class="card-title">{{rec.titre}}</h5>
+							<a href="{{ path('remove-recette', {"id": rec.id})}}" class="btn btn-dark w-100 align-self-end">Suprimer</a>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			{% else %}
+				<p>Vous n'avez pas de favoris</p>
+		{% endif %}
+	</div>
+
+	<div class="mt-4 border border p-3">
+		<h4>Modifiez vos données</h4>
+		{{ form_start(form) }}
+		{{ form_row(form.email) }}
+		{{ form_row(form.plainPassword) }}
+		<button type="submit" class="btn btn-dark">Modifier</button>
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

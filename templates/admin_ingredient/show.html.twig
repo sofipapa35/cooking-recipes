@@ -1,0 +1,38 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Ingredient{% endblock %}
+
+{% block body %}
+    <h1>Ingredient</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ingredient.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ ingredient.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ ingredient.description }}</td>
+            </tr>
+            <tr>
+                <th>ImageName</th>
+                <td>{{ ingredient.imageName }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ ingredient.updatedAt ? ingredient.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_ingredient_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_ingredient_edit', {'id': ingredient.id}) }}">edit</a>
+
+    {{ include('admin_ingredient/_delete_form.html.twig') }}
+{% endblock %}
