@@ -20,14 +20,14 @@ class RecetteFixtures extends Fixture implements DependentFixtureInterface
         $recette -> setQnt('4');
         $recette -> setNotation(20);
         $recette -> setNoteNumber(4);
-        $recette -> setListe("4 oignons\r\n\r\n50g de beurre\r\n\r\n1 c.à.s d\'huile1\r\n\r\n1l d\'eau\r\n\r\n6 tranches de pain de mie\r\n\r\n100 g de compté râpé\r\n\r\nsel\r\n\r\npoivre\r\n\r\n25 cl de vin blanc");
+        $recette -> setListe("4 oignons\r\n\r\n50g de beurre\r\n\r\n1 c.à.s d'huile1\r\n\r\n1l d'eau\r\n\r\n6 tranches de pain de mie\r\n\r\n100 g de compté râpé\r\n\r\nsel\r\n\r\npoivre\r\n\r\n25 cl de vin blanc");
         $recette -> setEtapes("Pelez et émincez les oignons.\r\n\r\n
-        Faites-les revenir dans le mélange beurre et huile jusqu\'à ce qu\'ils soient tendres et légèrement dorés.\r\n\r\n
-        Saupoudrez le mélange de farine, mouillez d\'eau chaude et de vin blanc et assaisonnez.\r\n\r\n
+        Faites-les revenir dans le mélange beurre et huile jusqu\'à ce qu'ils soient tendres et légèrement dorés.\r\n\r\n
+        Saupoudrez le mélange de farine, mouillez d'eau chaude et de vin blanc et assaisonnez.\r\n\r\n
         Couvrez et laissez bouillonner doucement pendant 20 minutes.\r\n\r\n
         Faites grillez le pain.\r\n\r\n
         Disposez chaque tranche dans le fond de 4 petits bols individuels supportant le passage au four.\r\n\r\n
-        Saupoudrez d\'un peu de fromage râpé. Versez la soupe par-dessus.\r\n\r\n
+        Saupoudrez d'un peu de fromage râpé. Versez la soupe par-dessus.\r\n\r\n
         Saupoudrez à nouveau de fromage et faites gratiner.");
         $recette->setUpdatedAt(new DateTimeImmutable);
         $recette->setCreatedAt(new DateTimeImmutable("2023-04-17"));
@@ -55,7 +55,7 @@ class RecetteFixtures extends Fixture implements DependentFixtureInterface
         chapelure");
         $recette -> setEtapes("Lavez et coupez les blancs de poireaux en tronçons. \r\n\r\n
         Faites-les cuire dans une sauteuse couverte avec le beurre\r\n\r\n
-        et un peu d\'eau environ 20 minutes.\r\n\r\n
+        et un peu d'eau environ 20 minutes.\r\n\r\n
         Une fois cuits, travaillez-les en purée à la fourchette.\r\n\r\n
         Etalez la pâte dans un moule, piquez-la à la fourchette.\r\n\r\n
         Saupoudrez de chapelure et étalez la purée de poireaux.\r\n\r\n
@@ -77,7 +77,7 @@ class RecetteFixtures extends Fixture implements DependentFixtureInterface
         $recette -> setQnt('4');
         $recette -> setNotation(22);
         $recette -> setNoteNumber(5);
-        $recette -> setListe("150 g d\'emmental ou gruyère râpé\r\n\r\n
+        $recette -> setListe("150 g d'emmental ou gruyère râpé\r\n\r\n
         60 g de beurre\r\n\r\n
         60 g de farine\r\n\r\n
         4 oeufs ou 5 moyens\r\n\r\n
@@ -87,8 +87,8 @@ class RecetteFixtures extends Fixture implements DependentFixtureInterface
         Chauffer le beurre dans une casserole, ajouter la farine et remuer rapidement pendant 1 min. Ajouter le lait tiédi, remuer au fouet pendant quelques minutes à feu doux.\r\n\r\n
         Retirer la casserole du feu.\r\n\r\n
         Séparer les blancs et les battre fermement (avec une pincée de sel).\r\n\r\n
-        Dans la casserole refroidie, ajouter les jaunes d\'oeufs un à un, puis le fromage râpé. Mettre une pincée de muscade, poivrer. Saler peu car le fromage contient déjà du sel.\r\n\r\n
-        Incorporer les blancs d\'oeufs battus en mélangeant délicatement.>Verser dans le moule, au maximum jusqu\'à 4 cm du bord.\r\n\r\n
+        Dans la casserole refroidie, ajouter les jaunes d'oeufs un à un, puis le fromage râpé. Mettre une pincée de muscade, poivrer. Saler peu car le fromage contient déjà du sel.\r\n\r\n
+        Incorporer les blancs d'oeufs battus en mélangeant délicatement.>Verser dans le moule, au maximum jusqu'à 4 cm du bord.\r\n\r\n
         Enfourner pendant 35 minutes en position chaleur tournante.");
         $recette->setUpdatedAt(new DateTimeImmutable);
         $recette->setCreatedAt(new DateTimeImmutable("2023-04-11"));
@@ -133,7 +133,7 @@ class RecetteFixtures extends Fixture implements DependentFixtureInterface
         sel\r\n\r\n
         poivre");
         $recette -> setEtapes("Faire cuire dans une poêle les lardons et les champignons. \r\n\r\n      
-        Dans un bol, verser la boîte de concentré de tomate, y ajouter un demi verre d\'eau, ensuite mettre un carré de sucre (pour enlever l\'acidité de la tomate) une pincée de sel, de poivre, et une pincée d\'herbe de Provence.\r\n\r\n
+        Dans un bol, verser la boîte de concentré de tomate, y ajouter un demi verre d'eau, ensuite mettre un carré de sucre (pour enlever l'acidité de la tomate) une pincée de sel, de poivre, et une pincée d'herbe de Provence.\r\n\r\n
         Dérouler la pâte à pizza sur le lèche frite de votre four, piquer-le \r\n\r\n
         Avec une cuillère à soupe, étaler délicatement la sauce tomate, ensuite y ajouter les lardons et les champignons bien dorer. Parsemer de fromage râpée. \r\n\r\n       
         Mettre au four à 220°, thermostat 7-8, pendant 20 min (ou lorsque le dessus de la pizza est doré).");
