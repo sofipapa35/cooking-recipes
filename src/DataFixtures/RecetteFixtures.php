@@ -144,6 +144,23 @@ class RecetteFixtures extends Fixture implements DependentFixtureInterface
         $recette->addCategory($this->getReference(CategorieFixtures::CATEGORY_BOISSONS));
         $recette->addIngredient($this->getReference(IngredientFixtures::ING_FRAISES));
         $recette->addIngredient($this->getReference(IngredientFixtures::ING_LAIT));
+        
+        $recette = new Recette();
+        $recette -> setTitre('Roulé à la fraise');
+        $recette -> setImageName('gateaufraises.jpg');
+        $recette -> setCal('100');
+        $recette -> setHeure('40');
+        $recette -> setQnt('8');
+        $recette -> setNotation(10);
+        $recette -> setNoteNumber(3);
+        $recette -> setListe("120 g de farine\r\n\r\n120 g de sucre\r\n\r\n4 oeufs\r\n\r\nconfiture de fraise\r\n\r\nvermicelle au chocolat blanc");
+        $recette -> setEtapes("Pour la génoise, battre 4 jaunes d'oeuf et 120 g de sucre jusqu'à ce que le mélange blanchisse. Battre 4 blancs en neige. Mélanger 120 g de farine et une pincée de sel avec le mélange aux oeufs. Ajouter délicatement les blancs en neige. Préchauffer votre four à 180°c, thermostat 6. Sur la plaque du four, étaler une feuille de papier sulfurisé beurrée. Étaler la génoise sur la plaque. Faire cuire 12 minutes. Faire refroidir sur un torchon humide (avec le papier sulfurisé). Étaler une couche de confiture à la fraise.\r\n\r\nRouler le gâteau délicatement. Envelopper dans du papier d'aluminium et laisser refroidir au réfrigérateur. Couper les extrémités. Décorer avec de la confiture et des vermicelles au chocolat blanc.");
+        $recette->setUpdatedAt(new DateTimeImmutable);
+        $recette->setCreatedAt(new DateTimeImmutable("2023-04-20"));
+        $manager->persist($recette);
+        $recette->addCategory($this->getReference(CategorieFixtures::CATEGORY_DESSERT));
+        $recette->addIngredient($this->getReference(IngredientFixtures::ING_FRAISES));
+        $recette->addIngredient($this->getReference(IngredientFixtures::ING_OEUFS));
 
         $manager->flush();
     }
