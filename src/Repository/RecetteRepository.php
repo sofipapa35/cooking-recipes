@@ -52,7 +52,7 @@ class RecetteRepository extends ServiceEntityRepository
         public function getRecetteNotation()
     {
         return $this->createQueryBuilder('re')
-        ->orderBy('re.notation','DESC')
+        ->orderBy('re.notation/re.noteNumber','DESC')
         ->setMaxResults(6)
         ->getQuery()
         ->getResult()
